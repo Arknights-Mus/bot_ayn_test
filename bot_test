@@ -1,5 +1,5 @@
 import telebot
-from bot_logic import gen_pass
+from bot_logic import gen_pass #для генератора паролей
 
 
 
