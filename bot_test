@@ -25,8 +25,45 @@ def send_bye(message):
 def send_password(message):
     bot.reply_to(message, gen_pass(10))
 
-@bot.message_handler(commands=['cillki'])
+
+
+@bot.message_handler(commands=['cillki_all'])
+def startmsg(message):
+    bot.reply_to(message, "https://www.twitch.tv/arknights_muc_su, https://steamcommunity.com/profiles/76561199890445421/, https://t.me/+pFy2sdHzthVlNTA6, https://www.youtube.com/@Барсуки-в2э")
+@bot.message_handler(commands=['cillka_twich'])
 def startmsg(message):
     bot.reply_to(message, "Эй, я хочу тебя попросить, присоединиться к моему разработчику на твич, да он молодой, но если ты не захочешь, тебя никто не заставляет  Присоединяйся на твич, Пожалуйста мой разраб будет рад. https://www.twitch.tv/arknights_muc_su")
-    
+
+@bot.message_handler(commands=['cillka_steam'])
+def startmsg(message):
+    bot.reply_to(message, "сыллка на моего разраба в стиме (если что у него много докозательств, что это его акк плюс телефон так что украсть не получиться!)https://steamcommunity.com/profiles/76561199890445421/")
+
+@bot.message_handler(commands=['cillka_tg'])
+def startmsg(message):
+    bot.reply_to(message, "тг какнал общий разраба https://t.me/pFy2sdHzthVlNTA6")
+
+@bot.message_handler(commands=['cillka_youtube'])
+def startmsg(message):
+    bot.reply_to(message, "на моего разраба ютyб канал https://www.youtube.com/@Барсуки-в2э")
+
+@bot.message_handler(commands=['help'])
+def startmsg(message):
+    bot.reply_to(message, "/help,/start,/hello,/bye,/password,/cillki_all,/cillka_twich,/cillka_steam,/cillka_tg,/cillka_youtube,вы прокаментировать смайликом любое сообщение и он тоже прокаментирует смайликом и напишет какой смайлик вы отправили")
+
+
+@bot.message_handler(func=lambda message: True)
+def send_reaction(message):
+    emo = ["\U0001F525", "\U0001F917", "\U0001F60E"]  # or use ["🔥", "🤗", "😎"]
+    bot.set_message_reaction(message.chat.id, message.id, [ReactionTypeEmoji(random.choice(emo))], is_big=False)
+
+
+@bot.message_reaction_handler(func=lambda message: True)
+def get_reactions(message):
+    bot.reply_to(message, f"You changed the reaction from {[r.emoji for r in message.old_reaction]} to {[r.emoji for r in message.new_reaction]}")
+
+bot.infinity_polling(allowed_updates=['message', 'message_reaction'])
+
+
+
+
 bot.polling()
