@@ -1,6 +1,6 @@
 import telebot
 from bot_logic import gen_pass #для генератора паролей
-
+from telebot.types import ReactionTypeEmoji
 
 
 token = 
@@ -8,25 +8,25 @@ token =
 bot = telebot.TeleBot(token, parse_mode="HTML")
 
 
-
+#старт
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
     bot.reply_to(message, "Привет! Я твой Telegram бот. Напиши что-нибудь!")
-
+#приветствие
 @bot.message_handler(commands=['hello'])
 def send_hello(message):
     bot.reply_to(message, "Привет! Как дела?")
-
+#пока
 @bot.message_handler(commands=['bye'])
 def send_bye(message):
     bot.reply_to(message, "Пока! Удачи!")
-
+#пароль
 @bot.message_handler(commands=['password'])
 def send_password(message):
     bot.reply_to(message, gen_pass(10))
 
 
-
+#сыллки
 @bot.message_handler(commands=['cillki_all'])
 def startmsg(message):
     bot.reply_to(message, "https://www.twitch.tv/arknights_muc_su, https://steamcommunity.com/profiles/76561199890445421/, https://t.me/+pFy2sdHzthVlNTA6, https://www.youtube.com/@Барсуки-в2э")
@@ -46,11 +46,42 @@ def startmsg(message):
 def startmsg(message):
     bot.reply_to(message, "на моего разраба ютyб канал https://www.youtube.com/@Барсуки-в2э")
 
+
+
+#помощь
 @bot.message_handler(commands=['help'])
 def startmsg(message):
-    bot.reply_to(message, "/help,/start,/hello,/bye,/password,/cillki_all,/cillka_twich,/cillka_steam,/cillka_tg,/cillka_youtube,вы прокаментировать смайликом любое сообщение и он тоже прокаментирует смайликом и напишет какой смайлик вы отправили")
+    bot.reply_to(message, "/help,/start,/hello,/bye,/password,/memes,/memes_pov,/memes_anime,/memes_CHiBoDnie,/cillki_all,/cillka_twich,/cillka_steam,/cillka_tg,/cillka_youtube")
 
 
+
+
+#мемы
+@bot.message_handler(commands=['memes'])
+def send_mem(message):
+    img_name = random.choice(os.listdir("memes"))
+    with open(f'memes/{img_name}', 'rb') as f:  
+        bot.send_photo(message.chat.id, f)  
+@bot.message_handler(commands=['memes_pov'])
+def send_mem(message):
+    img_name = random.choice(os.listdir("memes_pov"))
+    with open(f'memes_pov/{img_name}', 'rb') as f:  
+        bot.send_photo(message.chat.id, f)  
+@bot.message_handler(commands=['memes_anime'])
+def send_mem(message):
+    img_name1 = random.choice(os.listdir("memes_anime"))
+    with open(f'memes_anime/{img_name1}', 'rb') as f:  
+        bot.send_photo(message.chat.id, f)  
+@bot.message_handler(commands=['memes_CHiBoDnie'])
+def send_mem(message):
+    img_name2 = random.choice(os.listdir("memes_CHiBoDnie"))
+    with open(f'memes_CHiBoDnie/{img_name2}', 'rb') as f:  
+        bot.send_photo(message.chat.id, f)  
+
+
+
+
+#бот будет рандомно будет ставить смайлик на слово/предложение и вы если тоже смайликом отреагируете на любое предложение он напишет что вы поставили такой смайлик
 @bot.message_handler(func=lambda message: True)
 def send_reaction(message):
     emo = ["\U0001F525", "\U0001F917", "\U0001F60E"]  # or use ["🔥", "🤗", "😎"]
