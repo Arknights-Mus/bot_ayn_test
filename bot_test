@@ -4,7 +4,7 @@ from telebot.types import ReactionTypeEmoji
 ekologi_1=["Одна пальчиковая батарейка может отравить 400 литров воды или 20 квадратных метров земли. В ней содержатся более десятка видов токсичных веществ, в том числе смертельно опасные ртуть, свинец и кадмий.","В акватории Тихого океана уже долгие годы существует огромный мусорный остров, так называемый «материк» из пластиковых отходов, площадь которого превосходит территорию США.","В Китае есть небольшой населённый пункт Церматт, по которому строго запрещено передвигаться на автомобилях и прочих транспортных средствах с выхлопом. В этой небольшой деревне можно ездить лишь на велосипедах, электромобилях или гужевых повозках."]
 
 
-token = ''
+token = '8408163712:AAFYwcbpS5HlWN8lIjG5ymRyyjp7PYQU2xU'
 
 bot = telebot.TeleBot(token, parse_mode="HTML")
 
@@ -47,7 +47,7 @@ def startmsg(message):
 
 @bot.message_handler(commands=['help'])
 def startmsg(message):
-    bot.reply_to(message, "/help,/start,/hello,/bye,/password,/ekologi,/memes,/memes_pov,/memes_anime,/memes_CHiBoDnie,/memes_ekologi,/vact_ekologi,/cillki_all,/cillka_twich,/cillka_steam,/cillka_tg,/cillka_youtube")
+    bot.reply_to(message, "/help=хелп,/start=старт,/hello=привет,/bye=пока,/password=пароль,/ekologi=экология,/memes=мемы,/memes_pov=мемы_пув,/memes_anime=мемы_аниме,/memes_CHiBoDnie=мем_животные,/memes_ekologi=мем_экология,/vact_ekologi=вакт_экология,/cillki_all=все_сыллки,/cillka_twich=твич_сыллка,/cillka_steam=стим_сыллка,/cillka_tg=тг_сыллка,/cillka_youtube=ютуб_сыллка")
 
 
 @bot.message_handler(commands=['memes'])
@@ -94,7 +94,5 @@ def get_reactions(message):
     bot.reply_to(message, f"You changed the reaction from {[r.emoji for r in message.old_reaction]} to {[r.emoji for r in message.new_reaction]}")
 
 bot.infinity_polling(allowed_updates=['message', 'message_reaction'])
-
-bot.polling()
 
 bot.polling()
