@@ -1,9 +1,10 @@
 import telebot, random, os
-from bot_logic import gen_pass,ekologi
+from bot_logic import gen_pass
 from telebot.types import ReactionTypeEmoji
+ekologi_1=["Одна пальчиковая батарейка может отравить 400 литров воды или 20 квадратных метров земли. В ней содержатся более десятка видов токсичных веществ, в том числе смертельно опасные ртуть, свинец и кадмий.","В акватории Тихого океана уже долгие годы существует огромный мусорный остров, так называемый «материк» из пластиковых отходов, площадь которого превосходит территорию США.","В Китае есть небольшой населённый пункт Церматт, по которому строго запрещено передвигаться на автомобилях и прочих транспортных средствах с выхлопом. В этой небольшой деревне можно ездить лишь на велосипедах, электромобилях или гужевых повозках."]
 
 
-token =
+token = ''
 
 bot = telebot.TeleBot(token, parse_mode="HTML")
 
@@ -46,7 +47,7 @@ def startmsg(message):
 
 @bot.message_handler(commands=['help'])
 def startmsg(message):
-    bot.reply_to(message, "/help,/start,/hello,/bye,/password,/memes,/memes_pov,/memes_anime,/memes_CHiBoDnie,/memes_ekologi,/vact_ekologi,/cillki_all,/cillka_twich,/cillka_steam,/cillka_tg,/cillka_youtube")
+    bot.reply_to(message, "/help,/start,/hello,/bye,/password,/ekologi,/memes,/memes_pov,/memes_anime,/memes_CHiBoDnie,/memes_ekologi,/vact_ekologi,/cillki_all,/cillka_twich,/cillka_steam,/cillka_tg,/cillka_youtube")
 
 
 @bot.message_handler(commands=['memes'])
@@ -75,6 +76,10 @@ def send_mem(message):
     with open(f'memes_ekologi/{img_name}', 'rb') as f:  
         bot.send_photo(message.chat.id, f) 
 
+@bot.message_handler(commands=['ekologi'])
+def send_welcome(message):
+    bot.reply_to(message, random.choice(ekologi_1))
+
 
 
 
@@ -91,6 +96,5 @@ def get_reactions(message):
 bot.infinity_polling(allowed_updates=['message', 'message_reaction'])
 
 bot.polling()
-
 
 bot.polling()
