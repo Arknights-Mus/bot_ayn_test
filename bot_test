@@ -1,5 +1,5 @@
 import telebot, random, os
-from bot_logic import gen_pass
+from bot_logic import gen_pass, flip_coin
 from telebot.types import ReactionTypeEmoji
 ekologi_1=["Одна пальчиковая батарейка может отравить 400 литров воды или 20 квадратных метров земли. В ней содержатся более десятка видов токсичных веществ, в том числе смертельно опасные ртуть, свинец и кадмий.","В акватории Тихого океана уже долгие годы существует огромный мусорный остров, так называемый «материк» из пластиковых отходов, площадь которого превосходит территорию США.","В Китае есть небольшой населённый пункт Церматт, по которому строго запрещено передвигаться на автомобилях и прочих транспортных средствах с выхлопом. В этой небольшой деревне можно ездить лишь на велосипедах, электромобилях или гужевых повозках."]
 
@@ -25,6 +25,12 @@ def send_bye(message):
 @bot.message_handler(commands=['password'])
 def send_password(message):
     bot.reply_to(message, gen_pass(10))
+
+@bot.message_handler(commands=['coin'])
+def send_coin(message):
+    coin = flip_coin()
+    bot.reply_to(message, f"Монетка выпала так: {coin}")
+
 
 @bot.message_handler(commands=['cillki_all'])
 def startmsg(message):
